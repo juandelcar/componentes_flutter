@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static const mainColor = Color.fromARGB(255, 29, 245, 245);
@@ -8,12 +9,16 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData().copyWith(
     scaffoldBackgroundColor: backColor,
     appBarTheme: const AppBarTheme(color: mainColor),
-    textTheme: const TextTheme(
-      headlineLarge: TextStyle(
-        color: Color.fromARGB(232, 20, 21, 21),
+    textTheme:  TextTheme(
+      headlineLarge: GoogleFonts.tiltNeon(
+        color: const Color.fromARGB(232, 20, 21, 21),
         fontSize: 25.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'sans-serif',
+        fontWeight: FontWeight.w500,
+        decoration: TextDecoration.underline,
+        decorationColor: Colors.black,
+        decorationStyle: TextDecorationStyle.solid,
+        decorationThickness: 1.3,
+        fontStyle: FontStyle.italic,
       ),
     ),
   );
