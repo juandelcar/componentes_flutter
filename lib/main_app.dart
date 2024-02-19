@@ -10,11 +10,11 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 38, 250, 253),
-        appBarTheme: const AppBarTheme(color: Color.fromARGB(84, 43, 29, 245)),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 234, 240, 240),
+        appBarTheme: const AppBarTheme(color: Color.fromARGB(83, 29, 245, 245)),
         textTheme: const TextTheme(
           headlineLarge: TextStyle(
-            color: Color.fromARGB(232, 31, 240, 191),
+            color: Color.fromARGB(232, 20, 21, 21),
             fontSize: 25.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'sans-serif',
