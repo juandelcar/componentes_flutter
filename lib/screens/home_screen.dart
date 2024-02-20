@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practica3/theme/app_theme.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,8 +20,10 @@ class HomeScreen extends StatelessWidget {
             'Entradas',
             style: Theme.of(context).textTheme.headlineLarge,
           ),
-          subtitle: const Text('Diferentes widgets para entradas de flutter'),
-          trailing: const Icon(Icons.arrow_circle_right),
+          subtitle: Text('Diferentes widgets para entradas de flutter',
+              style: AppTheme.lightTheme.textTheme.bodySmall),
+          trailing: const Icon(Icons.arrow_circle_right,
+          color: Colors.black,),
         ),
         const Divider(),
         ListTile(
@@ -32,8 +35,10 @@ class HomeScreen extends StatelessWidget {
             'ListView.builder',
             style: Theme.of(context).textTheme.headlineLarge,
           ),
-          subtitle: const Text('Scroll Infinito'),
-          trailing: const Icon(Icons.arrow_circle_right),
+          subtitle: Text('Scroll Infinito',
+              style: AppTheme.lightTheme.textTheme.bodySmall),
+          trailing: const Icon(Icons.arrow_circle_right,
+          color: Colors.black,),
         ),
         const Divider(),
         ListTile(
@@ -45,8 +50,10 @@ class HomeScreen extends StatelessWidget {
             'Notificaciones',
             style: Theme.of(context).textTheme.headlineLarge,
           ),
-          subtitle: const Text('Creación de Notificaciones'),
-          trailing: const Icon(Icons.arrow_circle_right),
+          subtitle: Text('Creación de Notificaciones',
+              style: AppTheme.lightTheme.textTheme.bodySmall),
+          trailing: const Icon(Icons.arrow_circle_right,
+          color: Colors.black,),
         ),
         const Divider()
       ]),

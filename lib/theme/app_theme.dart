@@ -20,6 +20,13 @@ class AppTheme {
         decorationThickness: 1.3,
         fontStyle: FontStyle.italic,
       ),
+      bodySmall: GoogleFonts.montserrat(
+        fontWeight: FontWeight.w300, 
+        color: Colors.black, 
+        fontSize: 15.0, 
+        decoration: TextDecoration.lineThrough,
+        decorationColor: Colors.black,
+    ),
     ),
   );
 }
