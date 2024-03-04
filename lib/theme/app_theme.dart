@@ -48,6 +48,11 @@ class AppTheme {
         decoration: TextDecoration.lineThrough,
         decorationColor: Colors.black,
       ),
+         bodyMedium: GoogleFonts.dangrek( // theNautigal - Letra cursiva 
+        fontWeight: FontWeight.w500, // Cambia el estilo de la fuente
+        color: backColor, 
+      )
+
     ),
   );
 }
