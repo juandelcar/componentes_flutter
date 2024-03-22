@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:practica3/screens/data_screen.dart';
 import 'package:practica3/screens/home_screen.dart';
 import 'package:practica3/screens/images_screen.dart';
 import 'package:practica3/screens/infinite_list_screen.dart';
@@ -20,6 +22,8 @@ class _InputsScreenState extends State<InputsScreen> {
   double valueSlider = 0.0;
   int selectedIndex = 0;
   int selectedRadioOption = 0; // Para los RadioButton
+  TextEditingController textController =
+      TextEditingController(); // Controlador para el TextField
 
   openScreen(int index) {
     setState(() {
@@ -27,30 +31,34 @@ class _InputsScreenState extends State<InputsScreen> {
           MaterialPageRoute(builder: (context) => const HomeScreen());
       switch (index) {
         case 0:
-           ruta =
-              MaterialPageRoute(builder: (context) => const HomeScreen());
+          ruta = MaterialPageRoute(builder: (context) => const HomeScreen());
           break;
         case 1:
-           ruta = MaterialPageRoute(
+          ruta = MaterialPageRoute(
               builder: (context) => const InfinitListScreen());
           break;
         case 2:
-           ruta = MaterialPageRoute(
+          ruta = MaterialPageRoute(
               builder: (context) => const NotificationsScreen());
           break;
         case 3:
-           ruta =
-              MaterialPageRoute(builder: (context) => const ImagesScreen());
+          ruta = MaterialPageRoute(builder: (context) => const ImagesScreen());
           break;
-        default:
+        case 4:
+          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
       }
       selectedIndex = index;
-      // print('selectedIndex = $selectedIndex');
       Navigator.push(
         context,
         ruta,
       );
     });
+  }
+
+  @override
+  void dispose() {
+    textController.dispose(); // Limpia el controlador
+    super.dispose();
   }
 
   @override
@@ -73,7 +81,28 @@ class _InputsScreenState extends State<InputsScreen> {
               style: AppTheme.lightTheme.textTheme.headlineLarge,
             ),
             entradasCheck(),
-            const ElevatedButton(onPressed: null, child: Text('Guardar'))
+            ElevatedButton(
+              onPressed: () {
+                // Aquí recoges los datos de los inputs
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DataScreen(
+                      valueSwitch: valueSwitch,
+                      isChecked1: isChecked1,
+                      isChecked2: isChecked2,
+                      isChecked3: isChecked3,
+                      valueSlider: valueSlider,
+                      selectedRadioOption: selectedRadioOption,
+                      textInput: textController.text, // Valor del TextField
+                    ),
+                  ),
+                );
+              },
+              child: const Text(
+                'Guardar',
+              ),
+            ),
           ],
         ),
       ),
@@ -122,6 +151,7 @@ class _InputsScreenState extends State<InputsScreen> {
 
   TextField entradaTexto() {
     return TextField(
+      controller: textController, // Usa el controlador aquí
       style: AppTheme.lightTheme.textTheme.headlineMedium,
       decoration: InputDecoration(
         border: const UnderlineInputBorder(),
@@ -133,7 +163,6 @@ class _InputsScreenState extends State<InputsScreen> {
 
   Row entradaSwitch() {
     return Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Text(
           '¿Te gusta Flutter?',
@@ -148,7 +177,6 @@ class _InputsScreenState extends State<InputsScreen> {
           onChanged: (value) {
             setState(() {
               valueSwitch = value;
-              print('Estado del switch: $valueSwitch');
             });
           },
         )
@@ -175,7 +203,6 @@ class _InputsScreenState extends State<InputsScreen> {
             onChanged: (value) {
               setState(() {
                 valueSlider = value;
-                print('Valor del slider: $valueSlider');
               });
             })
       ],
@@ -202,7 +229,6 @@ class _InputsScreenState extends State<InputsScreen> {
               onChanged: (value) {
                 setState(() {
                   selectedRadioOption = value!;
-                  print('Opción Seleccionada: $selectedRadioOption');
                 });
               },
             ),
@@ -221,7 +247,6 @@ class _InputsScreenState extends State<InputsScreen> {
               onChanged: (value) {
                 setState(() {
                   selectedRadioOption = value!;
-                  print('Opción Seleccionada: $selectedRadioOption');
                 });
               },
             ),
@@ -244,7 +269,6 @@ class _InputsScreenState extends State<InputsScreen> {
             onChanged: (value) {
               setState(() {
                 isChecked1 = value!;
-                print('Valor de Navegador: isChecked1');
               });
             }),
         Text(
@@ -256,7 +280,6 @@ class _InputsScreenState extends State<InputsScreen> {
             onChanged: (value) {
               setState(() {
                 isChecked2 = value!;
-                print('Valor de Emulador: isChecked2');
               });
             }),
         Text(
@@ -268,7 +291,6 @@ class _InputsScreenState extends State<InputsScreen> {
             onChanged: (value) {
               setState(() {
                 isChecked3 = value!;
-                print('Valor de Smartphone: isChecked3');
               });
             }),
       ],

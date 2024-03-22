@@ -6,9 +6,45 @@ import 'package:practica3/screens/notifications_screen.dart';
 import 'package:practica3/theme/app_theme.dart';
 
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+  
 
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int selectedIndex = 0;
+  int selectedRadioOption = 0; // Para los RadioButton
+
+  void openScreen(int index) {
+    setState(() {
+      late MaterialPageRoute<dynamic> ruta;
+      switch (index) {
+        case 0:
+          ruta = MaterialPageRoute(builder: (context) => const HomeScreen());
+          break;
+        case 1:
+          ruta = MaterialPageRoute(builder: (context) => const InfinitListScreen());
+          break;
+        case 2:
+          ruta = MaterialPageRoute(builder: (context) => const NotificationsScreen());
+          break;
+        case 3:
+          ruta = MaterialPageRoute(builder: (context) => const ImagesScreen());
+          break;
+        default:
+          return;
+      }
+      selectedIndex = index;
+      Navigator.push(
+        context,
+        ruta,
+      );
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,18 +73,12 @@ class HomeScreen extends StatelessWidget {
                 style: AppTheme.lightTheme.textTheme.bodySmall,
               ),
 
-              // PASAR A JUAN
 
-              trailing: const CircularProgressIndicator(
-                strokeWidth: 15,
-                value: 0.75,
-                color: Colors.black,
-                backgroundColor: Colors.green,
+              
+             trailing: IconTheme(
+                 data: AppTheme.lightTheme.iconTheme,
+                 child: const Icon(Icons.arrow_circle_right, color: Colors.black),
               ),
-              // trailing: IconTheme(
-              //   data: AppTheme.lightTheme.iconTheme,
-              //   child: const Icon(Icons.arrow_circle_right, color: AppTheme.iconColor),
-              // ),
               onTap: () {
                 final ruta1 = MaterialPageRoute(builder: (context) {
                   return const InputsScreen();
@@ -143,6 +173,48 @@ class HomeScreen extends StatelessWidget {
                 }),
                 const Divider()
           ],
-        ));
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        backgroundColor: AppTheme.lightTheme.primaryColorLight,
+        selectedItemColor: Colors.indigo,
+        unselectedItemColor: Colors.black54,
+        onTap: (index) => openScreen(index),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'Inicio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.list,
+            ),
+            label: 'Lista',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notifications,
+            ),
+            label: 'Notificaciones',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.image,
+            ),
+            label: 'Imagenes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.exit_to_app,
+            ),
+            label: 'Salir',
+          ),
+        ],
+        unselectedLabelStyle: AppTheme.lightTheme.textTheme.bodyLarge,
+      ),
+        );
+        
   }
 }

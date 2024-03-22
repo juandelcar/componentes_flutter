@@ -14,7 +14,7 @@ class ImagesScreen extends StatefulWidget {
 
 class _ImagesScreenState extends State<ImagesScreen> {
 
-  int selectedIndex = 0;
+  int selectedIndex = 3;
   int selectedRadioOption = 0; // Para los RadioButton
 
   openScreen(int index) {
@@ -63,6 +63,46 @@ class _ImagesScreenState extends State<ImagesScreen> {
           imageCard(),
           imageWeb(),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        backgroundColor: AppTheme.lightTheme.primaryColorLight,
+        selectedItemColor: Colors.indigo,
+        unselectedItemColor: Colors.black54,
+        onTap: (index) => openScreen(index),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'Inicio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.list,
+            ),
+            label: 'Lista',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notifications,
+            ),
+            label: 'Notificaciones',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.image,
+            ),
+            label: 'Imagenes',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.exit_to_app,
+            ),
+            label: 'Salir',
+          ),
+        ],
+        unselectedLabelStyle: AppTheme.lightTheme.textTheme.bodyLarge,
       ),
     );
   }
